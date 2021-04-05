@@ -20,7 +20,7 @@
                         <span class="p-2 mt-2 badge badge-white text-black rounded-0 border border-dark">{{ c.friendly_name }}</span>
                     </a>
                 {% endfor %}
-                <hr class="mb-1">
+                <hr class="w-50 mb-1">
             </div>
         </div>
         <div class="row">
@@ -82,6 +82,12 @@
                                             {% else %}
                                                 <small class="text-muted">No Rating</small>
                                             {% endif %}
+                                            {% if request.user.is_superuser %}
+                                                <small class="ml-3">
+                                                    <a href="{% url 'edit_product' product.id %}">Edit</a> | 
+                                                    <a class="text-danger" href="{% url 'delete_product' product.id %}">Delete</a>
+                                                </small>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
@@ -118,6 +124,7 @@
         </a>	
     </div>
 {% endblock %}
+
 {% block postloadjs %}
     {{ block.super }}
     <script type="text/javascript">
